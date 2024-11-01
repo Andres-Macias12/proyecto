@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DentalCare: Gestión integral para consultorios odontológicos.">
+
+    <title>DentalCare</title>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
+    <!-- Solo cargar estilos adicionales si no es la página de login -->
+    {% if not request.path == '/login/' %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% endif %}
+</head>
+<body>
+
+   <!-- Sidebar -->
+<div class="d-flex" id="wrapper">
+    <!-- Solo mostrar el sidebar si no estamos en la página de login -->
+    {% if not request.path == '/login/' %}
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4">
+            <!-- Logo del consultorio -->
+            <img src="{% static 'img/logo.png' %}" alt="Logo del Consultorio" style="width: 150px;">
+        </div>
+        <div class="list-group list-group-flush">
+            <a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action bg-light {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                <i class="fas fa-tachometer-alt me-2"></i> Inicio
+            </a>
+
+            <!-- Dropdown para la sección de Pacientes -->
+            <!-- Submenu para Pacientes -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse" data-bs-target="#submenuPacientes">
+                <i class="fas fa-users me-2"></i> Pacientes <i class="fas fa-chevron-down float-end"></i>
+            </a>
+            <!-- Submenu de Pacientes (desplegable) -->
+            <div class="collapse" id="submenuPacientes">
+                <ul class="list-group">
+                    <li>
+                        <a href="{% url 'registrar_paciente' %}" class="list-group-item list-group-item-action bg-light">
+                            <i class="fas fa-user-plus me-2"></i> Nuevo Paciente
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'lista_pacientes' %}" class="list-group-item list-group-item-action bg-light">
+                            <i class="fas fa-list me-2"></i> Lista de Pacientes
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Otros enlaces del sidebar -->
+            <a href="#" class="list-group-item list-group-item-action bg-light" data-bs-toggle="collapse" data-bs-target="#submenuCitas">
+                <i class="fas fa-calendar-alt me-2"></i> Citas <i class="fas fa-chevron-down float-end"></i>
+            </a>
+            <!-- Submenu de Citas (desplegable) -->
+            <div class="collapse" id="submenuCitas">
+                <ul class="list-group">
+                    <li>
+                        <a href="{% url 'calendario_citas' %}" class="list-group-item list-group-item-action bg-light">
+                            <i class="fas fa-calendar-plus me-2"></i> Nueva Cita
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'lista_citas' %}" class="list-group-item list-group-item-action bg-light">
+                            <i class="fas fa-list me-2"></i> Lista de Citas
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <a href="{% url 'lista_tratamientos' %}" class="list-group-item list-group-item-action bg-light">
+                <i class="fas fa-tooth me-2"></i> Tratamientos
+            </a>
+            <a href="{% url 'panel_reportes' %}" class="list-group-item list-group-item-action bg-light">
+                <i class="fas fa-chart-line me-2"></i> Reportes
+            </a>
+           
+            <a href="{% url 'usuarios' %}" class="list-group-item list-group-item-action bg-light">
+                <i class="fas fa-user-cog me-2"></i> Usuarios
+            </a>
+            <a href="{% url 'facturacion' %}" class="list-group-item list-group-item-action bg-light">
+                <i class="fas fa-file-invoice-dollar me-2"></i> Facturación
+            </a>
+            <a href="{% url 'inventario' %}" class="list-group-item list-group-item-action bg-light">
+                <i class="fas fa-boxes me-2"></i> Inventario
+            </a>
+
+            <a href="{% url 'configuraciones' %}" class="list-group-item list-group-item-action bg-light">
+                    <i class="fas fa-cogs me-2"></i> Configuración
+            </a>     
+            </a>
+            <a href="{% url 'login' %}" class="list-group-item list-group-item-action bg-light">
+                <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+        <!-- Contenido principal -->
+        <div id="page-content-wrapper" class="w-100">
+            <!-- Mostrar mensajes flash de Django -->
+            <div class="container mt-3">
+                {% if messages %}
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Aquí va el contenido específico de cada página -->
+            <div class="container-fluid mt-4">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+    </div>
+
+   
+
+    <!-- Solo mostrar el footer si no estamos en la página de login -->
+    {% if not request.path == '/login/' %}
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">DentalCare &copy; 2024</span>
+        </div>
+    </footer>
+    {% endif %}
+    
+    
+    <!-- JavaScript para controlar el menú -->
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            document.getElementById("wrapper").classList.toggle("toggled");
+        });
+    </script>
+
+    <!-- Solo incluir estilos personalizados si no es el login -->
+    {% if not request.path == '/login/' %}
+    <style>
+        /* Estilos del sidebar */
+        #sidebar-wrapper {
+            width: 250px;
+            background-color: #fff;
+            transition: all 0.3s;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            overflow-y: auto;
+        }
+    
+        /* Personalización de la barra de desplazamiento */
+        #sidebar-wrapper::-webkit-scrollbar {
+            width: 6px; /* Ancho de la barra de desplazamiento */
+        }
+    
+        /* Fondo de la barra de desplazamiento */
+        #sidebar-wrapper::-webkit-scrollbar-track {
+            background: #f8f9fa; /* Fondo claro, mismo color del sidebar */
+        }
+    
+        /* Color y estilo del "thumb" (la parte que se mueve) */
+        #sidebar-wrapper::-webkit-scrollbar-thumb {
+            background-color: #c1c1c1; /* Color más suave para el thumb */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+    
+        /* Cuando el usuario pasa el cursor sobre la barra de desplazamiento */
+        #sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+            background-color: #a1a1a1; /* Color más oscuro al hacer hover */
+        }
+    
+        /* Personalización de la barra de desplazamiento para Firefox */
+        #sidebar-wrapper {
+            scrollbar-width: thin; /* Hacer que la barra sea más delgada */
+            scrollbar-color: #c1c1c1 #f8f9fa; /* Color del thumb y del track */
+        }
+    
+        /* Otros estilos del sidebar */
+        #sidebar-wrapper .sidebar-heading {
+            padding: 1.5rem;
+            font-size: 1.25rem;
+            text-align: center;
+            background-color: #fffF;
+            color: white;
+        }
+    
+        .list-group-item {
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            color: #009B9F;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    
+        .list-group-item i {
+            margin-right: 1rem;
+        }
+    
+        .list-group-item:hover {
+            background-color: #413074;
+            color: #413074;
+        }
+    
+        .list-group-item.active {
+            background-color: #3F51B5 !important;
+            color: white !important;
+            border-left: 4px solid #5C6BC0;
+            font-weight: bold;
+        }
+    
+        .dropdown-menu {
+            background-color: #f8f9fa;
+            border: none;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .dropdown-item:hover {
+            background-color: #3F51B5;
+            color: white;
+        }
+
+        /* Estilos personalizados */
+        .btn-primary {
+            background-color: #5C6BC0;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #3F51B5;
+        }
+
+        .card {
+            border-radius: 15px;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        .bg-gradient-primary {
+            background: linear-gradient(45deg, #3B82F6, #5C6BC0);
+        }
+
+        /* Hacer que el footer sea estático en la parte inferior de la página */
+        .footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+    
+        /* Asegura que el body llene toda la pantalla para que el footer se mantenga en el fondo */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+    </style>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

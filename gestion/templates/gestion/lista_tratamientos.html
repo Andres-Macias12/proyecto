@@ -1,0 +1,116 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container mt-4 container-custom">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary-custom">Lista de Tratamientos</h2>
+        <a href="{% url 'agregar_tratamiento' %}" class="btn btn-primary-custom">
+            <i class="fas fa-plus-circle"></i> Agregar Tratamiento
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-custom">
+            <thead>
+                <tr>
+                    <th>Tipo de Tratamiento</th>
+                    <th>Fecha</th>
+                    <th>Costo</th>
+                    <th>Observaciones</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tratamiento in tratamientos %}
+                    <tr>
+                        <td>{{ tratamiento.tipo }}</td>
+                        <td>{{ tratamiento.fecha|date:"d M Y" }}</td> <!-- Formateo de fecha -->
+                        <td>${{ tratamiento.costo }}</td>
+                        <td>{{ tratamiento.observaciones }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'editar_tratamiento' tratamiento.id %}" class="btn btn-secondary-custom btn-sm">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="{% url 'eliminar_tratamiento' tratamiento.id %}" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No hay tratamientos registrados.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<style>
+    /* Colores de la marca */
+    .text-primary-custom {
+        color: #009B9F; /* Color principal */
+    }
+
+    .btn-primary-custom {
+        background-color: #009B9F;
+        border-color: #009B9F;
+        color: #ffffff;
+    }
+
+    .btn-primary-custom:hover {
+        background-color: #1D2C7B; /* Cambiar color al pasar el cursor */
+        border-color: #1D2C7B;
+    }
+
+    .btn-secondary-custom {
+        background-color: #413074;
+        border-color: #413074;
+        color: #ffffff;
+    }
+
+    .btn-secondary-custom:hover {
+        background-color: #1D2C7B;
+        border-color: #1D2C7B;
+    }
+
+    .table-custom thead {
+        background-color: #413074;
+        color: #ffffff;
+    }
+
+    .table-custom tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table-custom td {
+        vertical-align: middle;
+    }
+
+    .table-custom th {
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .table-custom td, .table-custom th {
+        border-color: #009B9F;
+    }
+
+    /* Estilos adicionales para mejorar la visibilidad y experiencia */
+    .container-custom {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2.text-primary-custom {
+        font-weight: bold;
+    }
+</style>
+
+{% endblock %}
+
+

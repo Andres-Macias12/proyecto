@@ -1,0 +1,113 @@
+<!-- templates/home.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>DentalCare - Software Odontológico</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'img/logo.png' %}" alt="Logo" />
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="button-group">
+                <a href="{% url 'login' %}" class="login-button"><i class="fas fa-sign-in-alt"></i> Ingresar</a>
+                <a href="#" class="demo-button"><i class="fas fa-laptop"></i> Solicita tu demostración</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Transforma tu Consultorio Dental</h1>
+                <p>Gestión eficiente de pacientes, citas y tratamientos en un solo lugar. Simplifica tu trabajo y mejora la atención al paciente.</p>
+                <div class="button-group">
+                    <a href="#" class="demo-button"><i class="fas fa-laptop"></i> Solicita tu demostración</a>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <img src="{% static 'img/hero_image.png' %}" alt="Dentista" class="hero-image">
+            </div>
+        </section>
+    
+        <section class="features">
+            <h2><i class="fas fa-tools"></i> Características Principales</h2>
+            <div class="feature-container">
+                <div class="feature-item">
+                    <h3><i class="fas fa-user-md"></i> Gestión de Pacientes</h3>
+                    <p>Mantén un historial completo y accesible de tus pacientes.</p>
+                </div>
+                <div class="feature-item">
+                    <h3><i class="fas fa-bell"></i> Recordatorios Automáticos</h3>
+                    <p>Envía notificaciones para citas programadas vía email y SMS.</p>
+                </div>
+                <div class="feature-item">
+                    <h3><i class="fas fa-chart-line"></i> Reportes Detallados</h3>
+                    <p>Genera reportes sobre el rendimiento de tu consultorio con un solo clic.</p>
+                </div>
+            </div>
+        </section>
+    
+        <section class="stats">
+            <h2><i class="fas fa-chart-bar"></i> Nuestras Estadísticas</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3><i class="fas fa-user-md"></i> 50</h3>
+                    <p>Odontólogos</p>
+                </div>
+                <div class="stat-item">
+                    <h3><i class="fas fa-clinic-medical"></i> 10</h3>
+                    <p>Consultorios</p>
+                </div>
+                <div class="stat-item">
+                    <h3><i class="fas fa-trophy"></i> 20</h3>
+                    <p>Premios</p>
+                </div>
+                <div class="stat-item">
+                    <h3><i class="fas fa-smile"></i> 150</h3>
+                    <p>Clientes Felices</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-dark text-light py-4">
+        <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center">
+            <div class="footer-logo mb-3 mb-lg-0">
+                <img src="{% static 'img/logo_dentista.png' %}" alt="Logo" class="img-fluid" style="height: 60px;">
+            </div>
+            <div class="footer-links d-flex flex-column align-items-center align-items-lg-start mb-3 mb-lg-0">
+                <p>&copy; 2024 DentalCare. Todos los derechos reservados.</p>
+                <div class="links">
+                    <a href="#" class="text-light me-3"><i class="fas fa-shield-alt"></i> Política de Privacidad</a>
+                    <a href="#" class="text-light"><i class="fas fa-file-contract"></i> Términos de Servicio</a>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h5>Síguenos</h5>
+                <div class="social-icons">
+                    <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

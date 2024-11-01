@@ -1,0 +1,140 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center text-primary mb-4">Lista de Pacientes</h2>
+            
+            <!-- Buscador -->
+            <form method="GET" class="mb-4">
+                <div class="input-group shadow-sm">
+                    <input type="text" name="search" class="form-control" placeholder="Buscar por nombre, apellido o documento" value="{{ request.GET.search }}">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Tabla de Pacientes -->
+            <div class="table-responsive shadow-sm">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-primary">
+                        <tr class="text-center">
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Documento</th>
+                            <th>Teléfono</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paciente in pacientes %}
+                        <tr class="text-center">
+                            <td>{{ paciente.nombre }}</td>
+                            <td>{{ paciente.apellido }}</td>
+                            <td>{{ paciente.documento }}</td>
+                            <td>{{ paciente.telefono }}</td>
+                            <td>{{ paciente.correo }}</td>
+                            <td>
+                                <div class="d-grid gap-2 d-md-block">
+                                    <a href="{% url 'ver_historia_paciente' paciente.id %}" class="btn btn-outline-info btn-sm">
+                                        <i class="fas fa-eye"></i> Ver Historia
+                                    </a>
+                                    <a href="{% url 'editar_paciente' paciente.id %}" class="btn btn-outline-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </a>
+                                    <a href="{% url 'eliminar_paciente' paciente.id %}" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este paciente?');">
+                                        <i class="fas fa-trash-alt"></i> Eliminar
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No hay pacientes registrados o no se encontraron resultados para tu búsqueda.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación -->
+            <div class="d-flex justify-content-center mt-4">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        {% if pacientes.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ pacientes.previous_page_number }}&search={{ request.GET.search }}">Anterior</a>
+                        </li>
+                        {% endif %}
+                        
+                        {% for page_num in pacientes.paginator.page_range %}
+                        <li class="page-item {% if pacientes.number == page_num %}active{% endif %}">
+                            <a class="page-link" href="?page={{ page_num }}&search={{ request.GET.search }}">{{ page_num }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if pacientes.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ pacientes.next_page_number }}&search={{ request.GET.search }}">Siguiente</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estilos personalizados -->
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn-outline-info {
+        border-color: #17a2b8;
+        color: #17a2b8;
+    }
+
+    .btn-outline-info:hover {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .btn-outline-warning {
+        border-color: #ffc107;
+        color: #ffc107;
+    }
+
+    .btn-outline-warning:hover {
+        background-color: #ffc107;
+        color: white;
+    }
+
+    .btn-outline-danger {
+        border-color: #dc3545;
+        color: #dc3545;
+    }
+
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #5C6BC0;
+        border-color: #5C6BC0;
+    }
+
+    .pagination .page-link:hover {
+        color: #5C6BC0;
+    }
+
+    .pagination .page-link {
+        color: #6c757d;
+    }
+</style>
+{% endblock content %}

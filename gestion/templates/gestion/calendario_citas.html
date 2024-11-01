@@ -1,0 +1,65 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-5">Calendario de Citas</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="7" class="text-center bg-primary text-white">
+                            {{ month_name }} {{ year }}
+                        </th>
+                    </tr>
+                    <tr class="text-center bg-secondary text-white">
+                        <th>Lunes</th>
+                        <th>Martes</th>
+                        <th>Miércoles</th>
+                        <th>Jueves</th>
+                        <th>Viernes</th>
+                        <th>Sábado</th>
+                        <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for week in month_days %}
+                    <tr class="text-center">
+                        {% for day in week %}
+                            {% if day.status == 'empty' %}
+                                <td></td>
+                            {% elif day.status == 'pasado' %}
+                                <!-- Fecha pasada: mostrar botón para ver las citas -->
+                                <td>
+                                    <a href="{% url 'citas_del_dia' day.full_date %}" class="btn btn-secondary w-100">
+                                        {{ day.day }}<br>
+                                        <small>Ver Citas</small>
+                                    </a>
+                                </td>
+                            {% elif day.status == 'hoy' %}
+                                <!-- Fecha de hoy: mostrar botón para agendar cita -->
+                                <td>
+                                    <a href="{% url 'agendar_cita' %}?fecha={{ day.full_date }}" class="btn btn-outline-success w-100">
+                                        {{ day.day }}<br>
+                                        <small>Hoy</small>
+                                    </a>
+                                </td>
+                            {% elif day.status == 'futuro' %}
+                                <!-- Fecha futura: mostrar botón para agendar cita -->
+                                <td>
+                                    <a href="{% url 'agendar_cita' %}?fecha={{ day.full_date }}" class="btn btn-outline-primary w-100">
+                                        {{ day.day }}<br>
+                                        <small>Agendar</small>
+                                    </a>
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+<!-- templates/facturacion/crear_factura.html -->
+<form method="POST">
+    {% csrf_token %}
+    <label for="metodo_pago">Método de Pago:</label>
+    <select name="metodo_pago">
+        <option value="efectivo">Efectivo</option>
+        <option value="tarjeta">Tarjeta</option>
+        <option value="transferencia">Transferencia</option>
+    </select>
+    
+    <label for="estado">Estado:</label>
+    <select name="estado">
+        <option value="pendiente">Pendiente</option>
+        <option value="pagado">Pagado</option>
+    </select>
+    
+    <button type="submit">Registrar Factura</button>
+</form>

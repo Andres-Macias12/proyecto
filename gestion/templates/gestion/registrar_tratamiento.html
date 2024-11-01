@@ -1,0 +1,14 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Registrar Tratamiento</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Registrar Tratamiento</button>
+        <a href="{% url 'lista_tratamientos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

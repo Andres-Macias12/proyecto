@@ -1,0 +1,17 @@
+<!-- templates/facturacion/factura_pdf.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura #{{ factura.id }}</title>
+</head>
+<body>
+    <h1>Factura #{{ factura.id }}</h1>
+    <p><strong>Paciente:</strong> {{ factura.paciente.nombre }} {{ factura.paciente.apellido }}</p>
+    <p><strong>Tratamiento:</strong> {{ factura.tratamiento.tipo }}</p>
+    <p><strong>Fecha:</strong> {{ factura.fecha }}</p>
+    <p><strong>Monto Total:</strong> ${{ factura.monto_total }}</p>
+    <p><strong>Método de Pago:</strong> {{ factura.get_metodo_pago_display }}</p>
+    <p><strong>Estado:</strong> {{ factura.get_estado_display }}</p>
+</body>
+</html>

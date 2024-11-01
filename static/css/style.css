@@ -1,0 +1,164 @@
+
+
+#sidebar-wrapper {
+    background-color: #0b78e6; /* Color de fondo */
+    min-height: 100vh; /* Altura del sidebar */
+    width: 250px; /* Ancho del sidebar */
+    position: fixed; /* Fijo a la izquierda */
+    z-index: 1000; /* Asegura que esté encima del contenido */
+}
+
+.sidebar-heading {
+    color: #09a4ec; /* Color del texto del encabezado */
+    font-size: 1.5rem; /* Tamaño de fuente del encabezado */
+    padding: 10px 15px;
+}
+
+.list-group-item {
+    background-color: #19c9e0; /* Color de fondo de los links */
+    color: #228faa; /* Color del texto de los links */
+    border: none; /* Eliminar borde */
+}
+
+.list-group-item:hover {
+    background-color: #007bff; /* Color de fondo al hacer hover */
+    color: rgb(55, 255, 245); /* Cambia el color del texto al hacer hover */
+}
+
+.list-group-item i {
+    color: #adb5bd; /* Color de los iconos */
+}
+
+.list-group-item:hover i {
+    color: rgb(49, 54, 53); /* Cambia el color de los iconos al hacer hover */
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px; /* Oculta el sidebar al hacer toggle */
+}
+
+#page-content-wrapper {
+    width: 100%;
+    padding-left: 250px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    padding-left: 0;
+}
+
+
+.card {
+  border-radius: 10px;
+        
+ }
+
+    .card:hover {
+        
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card .btn {
+        border-radius: 20px;
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .card-title {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        color: #6c757d;
+    }
+
+    .fa {
+        transition: color 0.3s;
+    }
+
+    .fa:hover {
+        color: #000;
+    }
+
+    /* Ajustes de espaciado en pantallas pequeñas */
+    @media (max-width: 768px) {
+        .card-title {
+            font-size: 1rem;
+        }
+
+        .card-text {
+            font-size: 0.85rem;
+        }
+    }
+
+   
+    /* Colores personalizados */
+.text-primary-custom {
+    color: #009B9F;
+    font-weight: bold;
+}
+
+.btn-brand {
+    background-color: #009B9F;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+}
+
+.btn-brand:hover {
+    background-color: #007a85;
+    color: #ffffff;
+}
+
+/* Estilo de la tabla */
+.table-header-custom {
+    background-color: #1D2C7B;
+    color: #ffffff;
+    text-align: center;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.btn-action-edit {
+    background-color: #413074;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-action-edit:hover {
+    background-color: #2f245a;
+}
+
+.btn-action-delete {
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-action-delete:hover {
+    background-color: #c0392b;
+}
+
+/* Estilo de botones */
+.btn {
+    border-radius: 5px;
+}
+
+/* Ajuste del título */
+h2.text-primary-custom {
+    font-weight: bold;
+    color: #009B9F;
+}
+
+/* Ajuste del fondo blanco */
+body {
+    background-color: #ffffff;
+}

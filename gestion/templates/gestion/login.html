@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DentalCare - Login</title>
+    
+    <!-- Cargar Bootstrap y Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <!-- Cargar los estilos específicos para el login -->
+    
+</head>
+<body>
+
+<div class="container-fluid vh-100">
+    <div class="row h-100">
+        <!-- Columna Izquierda: Formulario de Login -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
+            <div class="p-5" style="max-width: 500px; width: 100%;">
+                <div class="text-center">
+                    <!-- Logo -->
+                    <img src="{% static 'img/logo.png' %}" alt="Logo" width="350" class="mb-4">
+                    <!-- Título -->
+                    <h2 class="mb-3" style="font-size: 20px; font-weight: bold; color: #009B9F;">Ingresa a tu cuenta</h2>
+                    <p class="mb-4" style="font-size: 15px; color: #6c757d;">Atiende tus pacientes, nosotros nos encargamos del resto.</p>
+                </div>
+                <!-- Formulario -->
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label" style="font-size: 14px; font-weight: bold;">Email</label>
+                        <input type="email" name="username" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="form-group mb-3 position-relative">
+                        <label for="password" class="form-label" style="font-size: 14px; font-weight: bold;">Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
+                        <!-- Botón para mostrar/ocultar contraseña -->
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePasswordVisibility()">
+                            <i class="fas fa-eye" id="password-icon"></i>
+                        </span>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-block" style="background-color: #009B9F; border: none; font-size: 16px;">Ingresar</button>
+                    </div>
+                </form>
+                <!-- Enlaces de ayuda -->
+                <div class="mt-3 text-center">
+                    <a href="#" class="text-muted" style="font-size: 12px;">¿Olvidaste tu contraseña?</a>
+                </div>
+                <div class="mt-3 text-center">
+                    <span style="font-size: 12px;">¿No tienes una cuenta?</span> <a href="#" class="text-primary" style="font-size: 12px;">Crea tu cuenta gratis aquí.</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna Derecha: Imagen -->
+        <div class="col-md-6 d-none d-md-block p-0">
+            <div class="image-container" style="background-image: url('{% static 'img/login-image.jpg' %}'); background-size: cover; background-position: center; height: 100%;"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Colores personalizados */
+    .text-primary-custom {
+        color: #009B9F;
+        font-weight: bold;
+    }
+
+    .btn-brand {
+        background-color: #009B9F;
+        color: #ffffff;
+        font-weight: bold;
+        border: none;
+    }
+
+    .btn-brand:hover {
+        background-color: #007a85;
+        color: #ffffff;
+    }
+
+    /* Estilo de la tabla */
+    .table-header-custom {
+        background-color: #1D2C7B;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .table td, .table th {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .btn-action-edit {
+        background-color: #413074;
+        color: #ffffff;
+        border: none;
+    }
+
+    .btn-action-edit:hover {
+        background-color: #2f245a;
+    }
+
+    .btn-action-delete {
+        background-color: #e74c3c;
+        color: #ffffff;
+        border: none;
+    }
+
+    .btn-action-delete:hover {
+        background-color: #c0392b;
+    }
+
+    /* Estilo de botones */
+    .btn {
+        border-radius: 5px;
+    }
+
+    /* Ajuste del título */
+    h2.text-primary-custom {
+        font-weight: bold;
+        color: #009B9F;
+    }
+
+    /* Ajuste del fondo blanco */
+    body {
+        background-color: #ffffff;
+    }
+
+    /* Estilo de iconos */
+    .fa {
+        transition: color 0.3s;
+    }
+
+    .fa:hover {
+        color: #000;
+    }
+</style>
+
+
+<!-- JavaScript para mostrar/ocultar la contraseña -->
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        var passwordIcon = document.getElementById("password-icon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordIcon.classList.remove("fa-eye");
+            passwordIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            passwordIcon.classList.remove("fa-eye-slash");
+            passwordIcon.classList.add("fa-eye");
+        }
+    }
+</script>
+
+<!-- Cargar Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

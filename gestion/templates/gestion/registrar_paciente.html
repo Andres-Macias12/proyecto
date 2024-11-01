@@ -1,0 +1,299 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center titulo-paciente mb-4">Registrar Nuevo Paciente</h2>
+
+    <form method="POST" enctype="multipart/form-data"> <!-- Asegurarse de incluir enctype para manejar archivos -->
+        {% csrf_token %}
+
+        <!-- Sección de Datos de Identificación -->
+        <h4 class="titulo-seccion">Datos de Identificación</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="nombre" class="label-paciente">Primer Nombre</label>
+                <input type="text" class="form-control input-paciente" id="nombre" name="nombre" placeholder="Nombre del paciente" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="segundo_nombre" class="label-paciente">Segundo Nombre</label>
+                <input type="text" class="form-control input-paciente" id="segundo_nombre" name="segundo_nombre" placeholder="Segundo Nombre del paciente">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="apellido" class="label-paciente">Primer Apellido</label>
+                <input type="text" class="form-control input-paciente" id="apellido" name="apellido" placeholder="Apellido del paciente" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="segundo_apellido" class="label-paciente">Segundo Apellido</label>
+                <input type="text" class="form-control input-paciente" id="segundo_apellido" name="segundo_apellido" placeholder="Segundo Apellido del paciente">
+            </div>
+        </div>
+
+        <!-- Sección para subir la foto del paciente -->
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="foto" class="label-paciente">Foto del Paciente</label>
+                <input type="file" class="form-control input-paciente" id="foto" name="foto" accept="image/*" required>
+            </div>
+        </div>
+
+        <!-- Tipo de Documento y Número de Documento -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="tipo_documento" class="label-paciente">Tipo de Documento</label>
+                <select class="form-select input-paciente" id="tipo_documento" name="tipo_documento" required>
+                    <option value="">Selecciona</option>
+                    <option value="CC">Cédula de Ciudadanía</option>
+                    <option value="TI">Tarjeta de Identidad</option>
+                    <option value="CE">Cédula de Extranjería</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="documento" class="label-paciente">Número de Documento</label>
+                <input type="text" class="form-control input-paciente" id="documento" name="documento" placeholder="Cédula o Documento" required>
+            </div>
+        </div>
+
+        <!-- Fecha de Nacimiento y Edad (automáticamente calculada) -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="fecha_nacimiento" class="label-paciente">Fecha de Nacimiento</label>
+                <input type="date" class="form-control input-paciente" id="fecha_nacimiento" name="fecha_nacimiento" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="edad" class="label-paciente">Edad </label>
+                <input type="text" class="form-control input-paciente" id="edad" name="edad" placeholder="Edad" readonly>
+            </div>
+        </div>
+
+        <!-- Estado Civil, Género y Ocupación -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="estado_civil" class="label-paciente">Estado Civil</label>
+                <select class="form-select input-paciente" id="estado_civil" name="estado_civil" required>
+                    <option value="">Selecciona</option>
+                    <option value="Soltero">Soltero</option>
+                    <option value="Casado">Casado</option>
+                    <option value="Divorciado">Divorciado</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="ocupacion" class="label-paciente">Ocupación</label>
+                <input type="text" class="form-control input-paciente" id="ocupacion" name="ocupacion" placeholder="Ocupación del paciente">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="telefono" class="label-paciente">Teléfono</label>
+                <input type="text" class="form-control input-paciente" id="telefono" name="telefono" placeholder="Teléfono de contacto" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="correo" class="label-paciente">Correo Electrónico</label>
+                <input type="email" class="form-control input-paciente" id="correo" name="correo" placeholder="Correo electrónico" required>
+            </div>
+        </div>
+
+        <!-- Dirección y Ciudad -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="direccion" class="label-paciente">Dirección</label>
+                <input type="text" class="form-control input-paciente" id="direccion" name="direccion" placeholder="Dirección del contacto" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="ciudad" class="label-paciente">Ciudad</label>
+                <input type="text" class="form-control input-paciente" id="ciudad" name="ciudad" placeholder="Ciudad" required>
+            </div>
+        </div>
+
+        <!-- Sección de Datos Médicos -->
+        <h4 class="titulo-seccion mt-4">Datos Médicos</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="tipo_sangre" class="label-paciente">Tipo de Sangre</label>
+                <select class="form-select input-paciente" id="tipo_sangre" name="tipo_sangre" required>
+                    <option value="">Selecciona</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="alergias" class="label-paciente">Alergias</label>
+                <input type="text" class="form-control input-paciente" id="alergias" name="alergias" placeholder="Alergias del paciente">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="enfermedades" class="label-paciente">Enfermedades Crónicas</label>
+                <input type="text" class="form-control input-paciente" id="enfermedades" name="enfermedades" placeholder="Enfermedades crónicas">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="medicacion" class="label-paciente">Medicación Actual</label>
+                <input type="text" class="form-control input-paciente" id="medicacion" name="medicacion" placeholder="Medicamentos que esté tomando">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="procedimientos_anteriores" class="label-paciente">Procedimientos Dentales Anteriores</label>
+                <input type="text" class="form-control input-paciente" id="procedimientos_anteriores" name="procedimientos_anteriores" placeholder="Ej. extracciones, empastes, etc.">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="frecuencia_cepillado" class="label-paciente">Frecuencia de Cepillado</label>
+                <select class="form-select input-paciente" id="frecuencia_cepillado" name="frecuencia_cepillado" required>
+                    <option value="">Selecciona</option>
+                    <option value="1 vez al día">1 vez al día</option>
+                    <option value="2 veces al día">2 veces al día</option>
+                    <option value="3 veces al día">3 veces al día</option>
+                    <option value="Más de 3 veces al día">Más de 3 veces al día</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="uso_hilo_dental" class="label-paciente">Uso de Hilo Dental</label>
+                <select class="form-select input-paciente" id="uso_hilo_dental" name="uso_hilo_dental" required>
+                    <option value="">Selecciona</option>
+                    <option value="Nunca">Nunca</option>
+                    <option value="Ocasionalmente">Ocasionalmente</option>
+                    <option value="Frecuentemente">Frecuentemente</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="fumador" class="label-paciente">Fumador</label>
+                <select class="form-select input-paciente" id="fumador" name="fumador" required>
+                    <option value="">Selecciona</option>
+                    <option value="Sí">Sí</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Nivel de Ansiedad Dental -->
+        <h4 class="titulo-seccion mt-4">Evaluación de Ansiedad</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="nivel_ansiedad" class="label-paciente">Nivel de Ansiedad Dental (1-10)</label>
+                <input type="number" class="form-control input-paciente" id="nivel_ansiedad" name="nivel_ansiedad" min="1" max="10" placeholder="Escala de 1 a 10">
+            </div>
+        </div>
+
+        <!-- Datos del Responsable -->
+        <h4 class="titulo-seccion">Contacto de emergencia</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="nombre_responsable" class="label-paciente">Nombre del Responsable</label>
+                <input type="text" class="form-control input-paciente" id="nombre_responsable" name="nombre_responsable" placeholder="Nombre del responsable">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="telefono_responsable" class="label-paciente">Teléfono del Responsable</label>
+                <input type="text" class="form-control input-paciente" id="telefono_responsable" name="telefono_responsable" placeholder="Teléfono del responsable">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="parentesco_responsable" class="label-paciente">Parentesco del Responsable</label>
+                <input type="text" class="form-control input-paciente" id="parentesco_responsable" name="parentesco_responsable" placeholder="Parentesco del responsable">
+            </div>
+        </div>
+
+        <!-- Observaciones -->
+        <h4 class="titulo-seccion">Observaciones</h4>
+        <div class="mb-3">
+            <textarea class="form-control input-paciente" id="observaciones" name="observaciones" rows="4" placeholder="Escribe aquí cualquier observación relevante"></textarea>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Registrar Paciente</button>
+            <a href="{% url 'lista_pacientes' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript para calcular la edad -->
+<script>
+    document.getElementById('fecha_nacimiento').addEventListener('change', function() {
+        const fechaNacimiento = new Date(this.value);
+        const hoy = new Date();
+        
+        let edadAnios = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        let edadMeses = hoy.getMonth() - fechaNacimiento.getMonth();
+        let edadDias = hoy.getDate() - fechaNacimiento.getDate();
+
+        // Ajustar si los días o meses son negativos
+        if (edadDias < 0) {
+            edadMeses--;
+            const ultimoDiaMesAnterior = new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate();
+            edadDias += ultimoDiaMesAnterior;
+        }
+
+        if (edadMeses < 0) {
+            edadAnios--;
+            edadMeses += 12;
+        }
+
+        // Mostrar el resultado en el campo de edad
+        document.getElementById('edad').value = `${edadAnios} años, ${edadMeses} meses, ${edadDias} días`;
+    });
+</script>
+
+<style>
+    /* Estilos personalizados */
+    .titulo-paciente, .titulo-seccion {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .label-paciente {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .input-paciente {
+        border-radius: 10px;
+        padding: 12px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+
+    .input-paciente:focus {
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+        border-color: #007bff;
+    }
+
+    .btn-registrar, .btn-cancelar {
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .btn-registrar {
+        background-color: #007bff;
+        color: white;
+        transition: background-color 0.3s;
+    }
+
+    .btn-registrar:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-cancelar {
+        background-color: #dc3545;
+        color: white;
+        transition: background-color 0.3s;
+    }
+
+    .btn-cancelar:hover {
+        background-color: #c82333;
+    }
+</style>
+{% endblock content %}

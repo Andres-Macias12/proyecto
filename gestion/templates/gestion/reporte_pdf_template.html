@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Citas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reporte de Citas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Paciente</th>
+                <th>Fecha</th>
+                <th>Motivo</th>
+                <th>Confirmada</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cita in citas %}
+            <tr>
+                <td>{{ cita.paciente.nombre }} {{ cita.paciente.apellido }}</td>
+                <td>{{ cita.fecha|date:"d/m/Y H:i" }}</td>
+                <td>{{ cita.motivo }}</td>
+                <td>{{ cita.confirmada|yesno:"Sí,No" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>&copy; 2024 DentalCare</p>
+    </div>
+</body>
+</html>

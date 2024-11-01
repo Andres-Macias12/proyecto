@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recordatorio de Cita</title>
+    <style>
+        /* Estilos básicos para correos electrónicos */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: none;
+        }
+        .email-container {
+            background-color: #ffffff;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .email-header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .email-header img {
+            width: 150px; /* Ajusta el tamaño del logo */
+        }
+        .email-body {
+            padding: 20px;
+            text-align: left;
+        }
+        .email-body p {
+            font-size: 16px;
+            color: #333333;
+        }
+        .email-footer {
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+            padding-top: 20px;
+        }
+        .button {
+            background-color: #009B9F; /* Color principal */
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .button-secondary {
+            background-color: #413074;
+        }
+        .button:hover {
+            background-color: #1D2C7B; /* Color de hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <img src="{{ logo_url }}" alt="Logo DentalCare">
+        </div>
+        <div class="email-body">
+            <p>Estimado/a <strong>{{ cita.paciente.nombre }} {{ cita.paciente.apellido }}</strong>,</p>
+
+            <p>Este es un recordatorio de su cita agendada para el día <strong>{{ cita.fecha|date:"d/m/Y" }}</strong> a las <strong>{{ cita.fecha|date:"H:i" }}</strong>.</p>
+
+            <p>Por favor, confirme su asistencia utilizando los siguientes enlaces:</p>
+
+            <p>
+                <a href="{{ confirm_url }}" class="button">Confirmar asistencia</a>
+            </p>
+            <p>
+                <a href="{{ reject_url }}" class="button button-secondary">Rechazar cita</a>
+            </p>
+
+            <p>Saludos cordiales,</p>
+            <p>Su equipo dental.</p>
+        </div>
+        <div class="email-footer">
+            <p>&copy; 2024 DentalCare. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Row que contiene todas las cards del Dashboard -->
+    <div class="row">
+        <!-- Card de Pacientes -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Pacientes</h5>
+                    <p class="card-text">Gestiona a tus pacientes fácilmente.</p>
+                    <a href="{% url 'lista_pacientes' %}" class="btn btn-primary">Lista Paciente</a>
+                    <a href="{% url 'registrar_paciente' %}" class="btn btn-primary">Nuevo Paciente</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card de Citas -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fas fa-calendar-alt fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Citas</h5>
+                    <p class="card-text">Controla y agenda citas con facilidad.</p>
+                    <a href="{% url 'lista_citas' %}" class="btn btn-success">Ver Citas</a>
+                    <a href="{% url 'calendario_citas' %}" class="btn btn-success">Nueva Citas</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card de Tratamientos -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fas fa-tooth fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Tratamientos</h5>
+                    <p class="card-text">Administra los tratamientos odontológicos.</p>
+                    <a href="{% url 'lista_tratamientos' %}" class="btn btn-warning">Ver Tratamientos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card de Reportes -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-center shadow-sm h-100">
+                <div class="card-body">
+                    <i class="fas fa-chart-line fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Reportes</h5>
+                    <p class="card-text">Genera y visualiza reportes detallados.</p>
+                    <a href="{% url 'panel_reportes' %}" class="btn btn-info">Ver Reportes</a>
+                </div>
+            </div>
+        </div>
+
+       
+{% endblock content %}

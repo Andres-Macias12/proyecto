@@ -1,0 +1,56 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-5">Agendar Cita para el {{ fecha }}</h2>
+
+    <!-- Asegúrate de usar la URL dinámica de Django -->
+    <form method="POST" action="{% url 'guardar_cita' %}">
+        {% csrf_token %}
+        <input type="hidden" name="fecha" value="{{ fecha }}">
+
+        <!-- Campo de selección de paciente con búsqueda habilitada -->
+        <div class="form-group">
+            <label for="paciente" class="form-label">Seleccionar Paciente</label>
+            <select id="paciente" name="paciente" class="form-control" required>
+                <option value="" disabled selected>Selecciona un paciente</option>
+                {% for paciente in pacientes %}
+                    <option value="{{ paciente.id }}">{{ paciente.nombre }} {{ paciente.apellido }} - {{ paciente.documento }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Campo para ingresar el motivo de la cita -->
+        <div class="form-group mt-3">
+            <label for="motivo" class="form-label">Motivo de la Cita</label>
+            <input type="text" id="motivo" name="motivo" class="form-control" placeholder="Ingresa el motivo" required>
+        </div>
+
+        <!-- Campo para ingresar la hora de la cita -->
+        <div class="form-group mt-3">
+            <label for="hora" class="form-label">Hora de la Cita</label>
+            <input type="time" id="hora" name="hora" class="form-control" required>
+        </div>
+
+        <!-- Botón para enviar el formulario -->
+        <button type="submit" class="btn btn-success mt-3">Agendar Cita</button>
+    </form>
+</div>
+
+<!-- Incluir jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Incluir Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!-- Script para activar Select2 en el campo de selección -->
+<script>
+    $(document).ready(function() {
+        $('#paciente').select2({
+            placeholder: "Busca un paciente por nombre o documento",
+            allowClear: true
+        });
+    });
+</script>
+{% endblock content %}

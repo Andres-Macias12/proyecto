@@ -1,0 +1,288 @@
+/* home.css */
+
+/* Variables de colores */
+:root {
+    --primary-color: #009B9F;
+    --secondary-color: #1D2C7B;
+    --tertiary-color: #413074;
+    --white-color: #ffffff;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white-color);
+    color: #333;
+    padding-top: 100px;
+}
+
+header {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    padding: 20px 0;
+    position: fixed; /* Hace que el header quede fijo */
+    top: 0; /* Lo fija en la parte superior */
+    width: 100%; /* Asegura que ocupe todo el ancho de la página */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añade una sombra para darle separación del contenido */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo img {
+    height: 80px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--secondary-color);
+}
+
+.button-group a {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.button-group a:hover {
+    background-color: var(--tertiary-color);
+}
+
+.hero {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    padding: 50px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 50%;
+}
+
+.hero h1 {
+    font-size: 30px;
+    margin-bottom: 10px; /* Reduce el espacio entre los h1 */
+    text-transform: uppercase;
+}
+
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    line-height: 1.6; /* Aumenta el espacio entre líneas */
+    text-align: justify; /* Justifica el texto para un aspecto más alineado */
+    color: #f8f8f8; /* Asegura que el color del texto sea legible */
+    padding: 10px 20px; /* Añade algo de espacio interno si es necesario */
+}
+
+.hero .button-group a {
+    font-size: 18px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    display: inline-block;
+}
+
+.hero .button-group a:hover {
+    background-color: var(--tertiary-color);
+}
+
+.hero-image-container {
+    flex: 1;
+    max-width: 50%;
+    text-align: right;
+}
+
+.hero-image {
+    max-width: 80%;
+    height: auto;
+}
+
+.features {
+    background-color: var(--white-color);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: var(--secondary-color);
+}
+
+.feature-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature-item {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+}
+
+.feature-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 16px;
+}
+
+.stats {
+    background-color: var(--tertiary-color);
+    color: var(--white-color);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.stats h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stat-item {
+    width: 22%;
+}
+
+.stat-item h3 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    font-size: 18px;
+}
+
+footer {
+    background-color: #009B9F; /* Color de fondo azul */
+    padding: 2rem 0; /* Espaciado alrededor */
+    color: white; /* Texto en color blanco */
+    font-family: 'Arial', sans-serif; /* Fuente limpia */
+}
+
+footer .container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre secciones */
+    align-items: center; /* Alinear verticalmente al centro */
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar el contenedor */
+    padding: 0 2rem; /* Espaciado lateral */
+}
+
+footer .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+footer .footer-logo img {
+    height: 110px; /* Altura del logo */
+    margin-bottom: 1rem; /* Espacio debajo del logo */
+}
+
+footer .cta-button {
+    background-color: #009B9F; /* Color del botón */
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+footer .cta-button:hover {
+    background-color: #3c47a6; /* Color en hover */
+}
+
+footer .social-icons {
+    display: flex;
+    gap: 1.5rem; /* Espacio entre los íconos */
+}
+
+footer .social-icons a {
+    font-size: 1.5rem; /* Tamaño de los íconos */
+    color: white;
+    transition: color 0.3s;
+}
+
+footer .social-icons a:hover {
+    color: #1024d4; /* Color en hover para los íconos */
+}
+
+footer .contact-info {
+    text-align: right;
+}
+
+footer .contact-info p {
+    margin: 0; /* Eliminar márgenes */
+}
+
+footer .footer-links {
+    margin-top: 1rem; /* Espacio antes de los enlaces de política */
+    text-align: center;
+}
+
+footer .footer-links a {
+    color: white;
+    margin: 0 0.8rem;
+    font-size: 0.9rem; /* Tamaño más pequeño */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer .footer-links a:hover {
+    color: #073fa8; /* Color en hover */
+}
+
+footer .copyright {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #d1d5db; /* Color de copyright en tono gris claro */
+    text-align: center;
+}
