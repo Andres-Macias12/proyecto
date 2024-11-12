@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Paciente</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Ajusta la ruta según tu archivo CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Eliminar Paciente</h1>
+        <p>¿Estás seguro de que deseas eliminar el siguiente paciente?</p>
+
+        <div class="patient-info">
+            <p><strong>Nombre:</strong> {{ paciente.nombre }}</p>
+            <p><strong>Edad:</strong> {{ paciente.edad }}</p>
+            <p><strong>Documento:</strong> {{ paciente.documento }}</p>
+            <!-- Añade aquí otros detalles relevantes del paciente -->
+        </div>
+
+        <form method="POST" action="{% url 'eliminar_paciente' paciente.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+            <a href="{% url 'lista_pacientes' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

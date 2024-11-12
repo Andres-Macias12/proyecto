@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cliente</title>
+    <!-- Bootstrap y Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilo de fondo y caja central */
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-container h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            box-shadow: none;
+            border: 1px solid #ddd;
+        }
+
+        .form-control:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+        }
+
+        .btn-custom {
+            background-color: #009B9F;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-custom:hover {
+            background-color: #007a85;
+        }
+
+        .btn-secondary-custom {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-secondary-custom:hover {
+            background-color: #5a636a;
+        }
+
+        .alert-info {
+            background-color: #cce5ff;
+            color: #004085;
+            font-weight: bold;
+            border: 1px solid #b8daff;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <!-- Mensajes de Error o Exito -->
+    <div class="alert alert-info alert-dismissible fade show" role="alert" style="display: {% if messages %}block{% else %}none{% endif %};">
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Caja de Formulario -->
+    <div class="form-container">
+        <h2>Crear Nuevo Cliente</h2>
+
+        <!-- Formulario para crear cliente -->
+        <form method="POST">
+            {% csrf_token %}
+            <!-- Mostrar formulario de manera más estilizada -->
+            <div class="mb-3">
+                <label for="id_nombre" class="form-label">Nombre Completo</label>
+                <input type="text" name="nombre" class="form-control" id="id_nombre" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" name="fecha_nacimiento" class="form-control" id="id_fecha_nacimiento" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_telefono" class="form-label">Teléfono</label>
+                <input type="text" name="telefono" class="form-control" id="id_telefono" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_direccion" class="form-label">Dirección</label>
+                <textarea name="direccion" class="form-control" id="id_direccion" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_email" class="form-label">Correo Electrónico</label>
+                <input type="email" name="email" class="form-control" id="id_email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_password" class="form-label">Contraseña</label>
+                <input type="password" name="password" class="form-control" id="id_password" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="id_confirm_password" class="form-label">Confirmar Contraseña</label>
+                <input type="password" name="confirm_password" class="form-control" id="id_confirm_password" required>
+            </div>
+
+            <button type="submit" class="btn-custom">Crear Cliente</button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <a href="{% url 'cliente_dashboard' %}" class="btn-secondary-custom">Volver al Dashboard</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

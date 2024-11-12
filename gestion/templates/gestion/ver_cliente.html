@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Cliente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Fondo y borde para el contenedor principal */
+        .container {
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        /* Estilos para el título */
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        /* Tabla personalizada */
+        .table {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .table th {
+            width: 35%;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+        }
+
+        .table td {
+            padding: 12px;
+            font-size: 16px;
+            color: #333;
+            border: none;
+            vertical-align: middle;
+        }
+
+        /* Botón de regreso */
+        .btn-primary {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Detalles del Cliente</h2>
+        <table class="table">
+            <tr>
+                <th>Nombre:</th>
+                <td>{{ cliente.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Correo:</th>
+                <td>{{ cliente.email }}</td>
+            </tr>
+            <tr>
+                <th>Teléfono:</th>
+                <td>{{ cliente.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Fecha de Nacimiento:</th>
+                <td>{{ cliente.fecha_nacimiento }}</td>
+            </tr>
+        </table>
+        <a href="{% url 'lista_clientes' %}" class="btn btn-primary">Volver a la lista de clientes</a>
+    </div>
+</body>
+</html>

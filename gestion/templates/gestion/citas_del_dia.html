@@ -1,0 +1,134 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4">Citas para el día {{ fecha|date:"d/m/Y" }}</h2>
+
+    {% if citas %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-custom">
+            <thead class="thead-custom">
+                <tr>
+                    <th>Paciente</th>
+                    <th>Motivo</th>
+                    <th>Tratamiento</th>
+                    <th>Hora</th>
+                    <th>Confirmada</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cita in citas %}
+                <tr>
+                    <td>{{ cita.paciente.nombre }} {{ cita.paciente.apellido }}</td>
+                    <td>{{ cita.motivo }}</td>
+                    <td>
+                        {% if cita.tratamiento %}
+                            {{ cita.tratamiento.tipo }}
+                        {% else %}
+                            <span class="text-muted">No asignado</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ cita.fecha|date:"H:i" }}</td>
+                    <td>
+                        {% if cita.confirmada %}
+                            <span class="badge bg-success text-white">Confirmada</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">Pendiente</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-center text-danger">No hay citas programadas para este día.</p>
+    {% endif %}
+</div>
+
+<style>
+    /* Contenedor principal */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Título */
+    h2.text-center {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #0056b3;
+        letter-spacing: 1px;
+    }
+
+    /* Estilos de la tabla */
+    .table-custom {
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        border: 1px solid #ddd;
+    }
+
+    .thead-custom {
+        background-color: #007BFF;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .table-custom th, .table-custom td {
+        text-align: center;
+        padding: 15px;
+        border: 1px solid #ddd;
+        vertical-align: middle;
+    }
+
+    .table-custom tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Estilos para los badges de estado */
+    .badge {
+        padding: 8px 15px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .bg-success {
+        background-color: #28a745 !important;
+    }
+
+    .bg-warning {
+        background-color: #ffc107 !important;
+    }
+
+    .text-white {
+        color: #fff !important;
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+    /* Mensajes de error */
+    .text-danger {
+        color: #dc3545;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+        .table-custom th, .table-custom td {
+            font-size: 0.9rem;
+            padding: 12px;
+        }
+
+        h2.text-center {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+{% endblock %}

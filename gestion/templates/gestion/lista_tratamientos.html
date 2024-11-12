@@ -24,21 +24,21 @@
                 {% for tratamiento in tratamientos %}
                     <tr>
                         <td>{{ tratamiento.tipo }}</td>
-                        <td>{{ tratamiento.fecha|date:"d M Y" }}</td> <!-- Formateo de fecha -->
+                        <td>{{ tratamiento.fecha|date:"d M Y" }}</td>
                         <td>${{ tratamiento.costo }}</td>
                         <td>{{ tratamiento.observaciones }}</td>
                         <td class="text-center">
                             <a href="{% url 'editar_tratamiento' tratamiento.id %}" class="btn btn-secondary-custom btn-sm">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="{% url 'eliminar_tratamiento' tratamiento.id %}" class="btn btn-danger btn-sm">
+                            <a href="{% url 'eliminar_tratamiento' tratamiento.id %}" class="btn btn-danger-custom btn-sm">
                                 <i class="fas fa-trash-alt"></i> Eliminar
                             </a>
                         </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="5" class="text-center">No hay tratamientos registrados.</td>
+                        <td colspan="5" class="text-center text-muted">No hay tratamientos registrados.</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -46,71 +46,88 @@
     </div>
 </div>
 
-
 <style>
-    /* Colores de la marca */
+    /* Colores personalizados */
     .text-primary-custom {
-        color: #009B9F; /* Color principal */
+        color: #009B9F;
+    }
+
+    /* Botones personalizados */
+    .btn-primary-custom, .btn-secondary-custom, .btn-danger-custom {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
     .btn-primary-custom {
         background-color: #009B9F;
-        border-color: #009B9F;
-        color: #ffffff;
+        border: 1px solid transparent;
     }
 
     .btn-primary-custom:hover {
-        background-color: #1D2C7B; /* Cambiar color al pasar el cursor */
-        border-color: #1D2C7B;
+        background-color: #007882;
+        transform: translateY(-2px);
     }
 
     .btn-secondary-custom {
-        background-color: #413074;
-        border-color: #413074;
-        color: #ffffff;
+        background-color: #5B4D98;
+        border: 1px solid transparent;
     }
 
     .btn-secondary-custom:hover {
-        background-color: #1D2C7B;
-        border-color: #1D2C7B;
+        background-color: #443476;
+        transform: translateY(-2px);
     }
 
+    .btn-danger-custom {
+        background-color: #d9534f;
+        border: 1px solid transparent;
+    }
+
+    .btn-danger-custom:hover {
+        background-color: #c9302c;
+        transform: translateY(-2px);
+    }
+
+    /* Tabla personalizada */
     .table-custom thead {
-        background-color: #413074;
+        background-color: #5B4D98;
         color: #ffffff;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .table-custom th, .table-custom td {
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid #009B9F;
+    }
+
+    .table-custom tbody tr {
+        transition: background-color 0.3s ease;
     }
 
     .table-custom tbody tr:hover {
-        background-color: #f1f1f1;
+        background-color: #f0f8ff;
     }
 
-    .table-custom td {
-        vertical-align: middle;
-    }
-
-    .table-custom th {
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .table-custom td, .table-custom th {
-        border-color: #009B9F;
-    }
-
-    /* Estilos adicionales para mejorar la visibilidad y experiencia */
+    /* Contenedor personalizado */
     .container-custom {
         background-color: #ffffff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
+    /* Título */
     h2.text-primary-custom {
         font-weight: bold;
+        font-size: 1.8rem;
+        letter-spacing: 0.5px;
     }
 </style>
 
 {% endblock %}
-
-

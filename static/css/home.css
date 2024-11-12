@@ -88,7 +88,7 @@ nav ul li a:hover {
 }
 
 .hero h1 {
-    font-size: 30px;
+    font-size: 40px;
     margin-bottom: 10px; /* Reduce el espacio entre los h1 */
     text-transform: uppercase;
 }
@@ -286,3 +286,4 @@ footer .copyright {
     color: #d1d5db; /* Color de copyright en tono gris claro */
     text-align: center;
 }
+

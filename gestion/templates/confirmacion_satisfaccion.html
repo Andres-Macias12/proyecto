@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Cita</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            margin: 50px auto;
+            padding: 30px;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        p {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        .confirmacion {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>¡Cita Confirmada Exitosamente!</h2>
+        <p>Estimado/a <strong>{{ cita.paciente.nombre }} {{ cita.paciente.apellido }}</strong>,</p>
+        <p>Tu cita ha sido confirmada para el día <strong>{{ cita.fecha|date:"d/m/Y" }}</strong> a las <strong>{{ cita.fecha|time:"H:i" }}</strong>.</p>
+        <p class="confirmacion">¡Gracias por confirmar tu cita!</p>
+    </div>
+</body>
+</html>

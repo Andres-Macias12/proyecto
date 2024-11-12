@@ -2,121 +2,232 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="card shadow-sm">
-        <div class="card-header text-center bg-primary text-white">
-            <h2>Historia del Paciente: {{ paciente.nombre }} {{ paciente.apellido }}</h2>
-        </div>
-        <div class="card-body">
-
-            <!-- Mostrar la foto del paciente -->
-            <div class="text-center mb-4">
-                {% if paciente.foto %}
-                    <img src="{{ paciente.foto.url }}" alt="Foto del paciente" class="img-thumbnail rounded-circle" style="max-width: 150px;">
-                {% else %}
-                    <p class="text-muted">No hay foto disponible.</p>
-                {% endif %}
-            </div>
-
-            <!-- Datos del Paciente -->
-            <h4 class="mb-3 text-primary">Datos del Paciente</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <p><strong>Documento:</strong> {{ paciente.documento }}</p>
-                    <p><strong>Fecha de Nacimiento:</strong> {{ paciente.fecha_nacimiento|date:"d/m/Y" }}</p>
-                    <p><strong>Teléfono:</strong> {{ paciente.telefono }}</p>
-                    <p><strong>Correo:</strong> {{ paciente.correo }}</p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Dirección:</strong> {{ paciente.direccion }}</p>
-                    <p><strong>Ciudad:</strong> {{ paciente.ciudad }}</p>
-                    <p><strong>Tipo de Sangre:</strong> {{ paciente.tipo_sangre }}</p>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <p><strong>Alergias:</strong> {{ paciente.alergias|default:"Ninguna" }}</p>
-                    <p><strong>Enfermedades Crónicas:</strong> {{ paciente.enfermedades|default:"Ninguna" }}</p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Medicación Actual:</strong> {{ paciente.medicacion|default:"Ninguna" }}</p>
-                </div>
-            </div>
-
-            <!-- Historial de Citas -->
-            <div class="mt-5">
-                <h4 class="mb-3 text-primary">Historial de Citas</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Motivo</th>
-                                <th>Confirmada</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for cita in citas %}
-                            <tr>
-                                <td>{{ cita.fecha|date:"d/m/Y H:i" }}</td>
-                                <td>{{ cita.motivo }}</td>
-                                <td>
-                                    {% if cita.confirmada %}
-                                        <span class="badge bg-success">Sí</span>
-                                    {% else %}
-                                        <span class="badge bg-danger">No</span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="3" class="text-center text-muted">No hay citas registradas</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+    <h1 class="text-center text-primary">Historia Clínica - {{ paciente.documento }}</h1>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="profile-pic mb-3">
+                        {% if paciente.foto %}
+                            <img src="{{ paciente.foto.url }}" alt="Foto del paciente" class="img-fluid rounded-circle" />
+                        {% else %}
+                            <div class="no-photo rounded-circle">
+                                <p class="text-muted">No hay foto disponible</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <h4>{{ paciente.nombre }} {{ paciente.apellido }}</h4>
+                    <h5 class="text-secondary">Información del Paciente</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Documento:</strong> {{ paciente.documento }}</li>
+                        <li><strong>Fecha de Nacimiento:</strong> {{ paciente.fecha_nacimiento|date:"d/m/Y" }}</li>
+                        <li><strong>Edad:</strong> {{ edad }} años</li>
+                        <li><strong>Teléfono:</strong> {{ paciente.telefono }}</li>
+                        <li><strong>Correo:</strong> {{ paciente.correo }}</li>
+                        <li><strong>Dirección:</strong> {{ paciente.direccion }}</li>
+                        <li><strong>Ciudad:</strong> {{ paciente.ciudad }}</li>
+                        <li><strong>Tipo de Sangre:</strong> {{ paciente.tipo_sangre }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="card-footer text-center">
-            <a href="{% url 'lista_pacientes' %}" class="btn btn-secondary">Volver a la Lista de Pacientes</a>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="text-secondary">Servicios Ofrecidos</h5>
+                    <div class="service-item">
+                        <h6>Motivos de Consulta</h6>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Motivo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for motivo in motivos_consulta %}
+                                    <tr>
+                                        <td>{{ motivo.fecha|date:"d/m/Y" }}</td>
+                                        <td>{{ motivo.descripcion }}</td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="2" class="text-center text-muted">No hay motivos de consulta registrados</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h6>Tratamientos Realizados</h6>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo de Tratamiento</th>
+                                        <th>Fecha</th>
+                                        <th>Costo</th>
+                                        <th>Observaciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for tratamiento in tratamientos %}
+                                    <tr>
+                                        <td>{{ tratamiento.tipo }}</td>
+                                        <td>{{ tratamiento.fecha|date:"d/m/Y" }}</td>
+                                        <td>${{ tratamiento.costo }}</td>
+                                        <td>{{ tratamiento.observaciones }}</td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">No hay tratamientos registrados</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h6>Facturas Generadas</h6>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Monto Total</th>
+                                        <th>Método de Pago</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for factura in facturas %}
+                                    <tr>
+                                        <td>{{ factura.fecha|date:"d/m/Y" }}</td>
+                                        <td>${{ factura.monto_total }}</td>
+                                        <td>{{ factura.get_metodo_pago_display }}</td>
+                                        <td>
+                                            {% if factura.estado == 'pagado' %}
+                                                <span class="badge bg-success">Pagado</span>
+                                            {% else %}
+                                                <span class="badge bg-warning text-dark">Pendiente</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">No hay facturas generadas</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <h6>Historial de Citas</h6>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Motivo</th>
+                                        <th>Confirmada</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cita in citas %}
+                                    <tr>
+                                        <td>{{ cita.fecha|date:"d/m/Y H:i" }}</td>
+                                        <td>{{ cita.motivo }}</td>
+                                        <td>
+                                            {% if cita.confirmada %}
+                                                <span class="badge bg-success">Sí</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">No</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="3" class="text-center text-muted">No hay citas registradas</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <style>
     /* Estilos personalizados */
+    .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-pic {
+        border: 5px solid #007bff;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        margin: auto;
+    }
+
+    .no-photo {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid #007bff;
+        background-color: #e9ecef;
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+
     .card {
         border-radius: 10px;
-        overflow: hidden;
+        border: 1px solid #007bff;
+        margin-bottom: 15px;
     }
 
-    .card-header {
-        background: linear-gradient(135deg, #007bff, #00c6ff);
-        padding: 15px;
+    h1 {
+        color: #007bff;
     }
 
-    .card-body {
-        padding: 30px;
+    h5, h6 {
+        color: #6c757d;
     }
 
-    .img-thumbnail {
-        border: 5px solid #007bff;
-        padding: 5px;
-        max-width: 150px;
-    }
-
-    .table thead th {
+    .table th {
+        background-color: #007bff;
+        color: #ffffff;
         font-weight: bold;
-    }
-
-    .table tbody td {
-        vertical-align: middle;
     }
 
     .badge {
         font-size: 0.9rem;
         padding: 5px 10px;
+        border-radius: 12px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+
+    .table tbody td {
+        vertical-align: middle;
     }
 </style>
 {% endblock content %}

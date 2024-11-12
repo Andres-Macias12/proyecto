@@ -25,3 +25,12 @@ def enviar_notificaciones():
             [cita.paciente.correo],  # El correo del destinatario
             fail_silently=False,
         )
+
+
+def format_number(num):
+    if num >= 1_000_000:
+        return f"{num / 1_000_000:.1f}M"  # Para millones
+    elif num >= 1_000:
+        return f"{num / 1_000:.1f}K"  # Para miles
+    else:
+        return str(num)

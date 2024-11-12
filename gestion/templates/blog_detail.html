@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<style>
+    .article-content-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        line-height: 1.8;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .article-content-container h2 {
+        color: #4a4da8;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .important-text {
+        font-weight: bold;
+        color: #4a4da8;
+    }
+
+    ul, ol {
+        padding-left: 20px;
+        margin: 15px 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    .centered-image {
+        display: block;
+        margin: 20px auto;
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="article-content-container">
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.published_date|date:"d M Y" }}</p>
+
+    <!-- Contenido principal del artículo -->
+    <div class="content">
+        {{ article.main_content|safe }} <!-- Permitir HTML en el contenido principal -->
+    </div>
+
+    <!-- Secciones del artículo -->
+    {% for section in article.sections.all %}
+        {% if section.section_title %}
+            <h2>{{ section.section_title }}</h2>
+        {% endif %}
+        <div>{{ section.section_content|safe }}</div>
+    {% endfor %}
+</div>
+{% endblock %}

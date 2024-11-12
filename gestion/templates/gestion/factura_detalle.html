@@ -1,0 +1,15 @@
+<!-- factura_detalle.html -->
+<h1>Factura Detalle</h1>
+<p>Paciente: {{ factura.paciente.nombre }}</p>
+<p>Fecha de emisión: {{ factura.fecha_emision }}</p>
+<p>Total: ${{ factura.total }}</p>
+<p>Estado de pago: {% if factura.estado_pago %} Pagada {% else %} Pendiente {% endif %}</p>
+
+<h3>Tratamientos realizados:</h3>
+<ul>
+    {% for tratamiento in factura.tratamientos.all %}
+        <li>{{ tratamiento.nombre }} - ${{ tratamiento.costo }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'factura_lista' %}">Volver a la lista de facturas</a>

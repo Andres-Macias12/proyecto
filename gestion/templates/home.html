@@ -20,13 +20,13 @@
             <nav>
                 <ul>
                     <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    <li><a href="{% url 'blog' %}"><i class="fas fa-blog"></i> Blog</a></li>
+                    <li><a href="{% url 'reservas' %}"><i class="fas fa-envelope"></i> Contacto</a></li>
                 </ul>
             </nav>
             <div class="button-group">
                 <a href="{% url 'login' %}" class="login-button"><i class="fas fa-sign-in-alt"></i> Ingresar</a>
-                <a href="#" class="demo-button"><i class="fas fa-laptop"></i> Solicita tu demostración</a>
+                <a href="{% url 'reservas' %}" class="demo-button"><i class="fas fa-laptop"></i> Solicita tu demostración</a>
             </div>
         </div>
     </header>
@@ -37,7 +37,7 @@
                 <h1>Transforma tu Consultorio Dental</h1>
                 <p>Gestión eficiente de pacientes, citas y tratamientos en un solo lugar. Simplifica tu trabajo y mejora la atención al paciente.</p>
                 <div class="button-group">
-                    <a href="#" class="demo-button"><i class="fas fa-laptop"></i> Solicita tu demostración</a>
+                    <a href="{% url 'reservas' %}" class="demo-button"><i class="fas fa-laptop"></i> Solicita tu demostración</a>
                 </div>
             </div>
             <div class="hero-image-container">

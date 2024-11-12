@@ -2,10 +2,9 @@
 {% load static %}
 
 {% block content %}
-
 <div class="container-custom mt-5">
     <h2>Agregar Tratamiento</h2>
-    
+
     <form method="post" class="mt-4">
         {% csrf_token %}
         
@@ -19,10 +18,7 @@
             {{ form.tipo }}
         </div>
         
-        <div class="mb-3">
-            {{ form.fecha.label_tag }}
-            {{ form.fecha }}
-        </div>
+    
         
         <div class="mb-3">
             {{ form.costo.label_tag }}
@@ -33,7 +29,7 @@
             {{ form.observaciones.label_tag }}
             {{ form.observaciones }}
         </div>
-        
+
         <button type="submit" class="btn btn-primary me-2">Guardar Tratamiento</button>
         <a href="{% url 'lista_tratamientos' %}" class="btn btn-secondary">Cancelar</a>
     </form>
@@ -42,71 +38,81 @@
 <style>
     /* Contenedor personalizado */
     .container-custom {
-        background-color: #ffffff; /* Fondo blanco del contenedor */
-        padding: 40px; /* Espaciado interno (padding) de 40px en todos los lados */
-        border-radius: 12px; /* Bordes redondeados de 12px en el contenedor */
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Sombra suave alrededor del contenedor para darle un efecto elevado */
-        max-width: 900px; /* Ancho máximo de 900px para el contenedor */
-        margin: 0 auto; /* Centra el contenedor horizontalmente en la página */
+        background-color: #ffffff; /* Fondo blanco puro */
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Sombra fuerte */
+        max-width: 700px;
+        margin: 0 auto;
+        border-left: 8px solid #007BFF; /* Detalle lateral */
     }
-    
-    /* Título del formulario */
+
+    /* Títulos */
     h2 {
-        color: #009B9F; /* Color azul-verde del texto, siguiendo el esquema de colores de la marca */
-        font-weight: bold; /* Texto en negrita */
-        text-align: center; /* Centra el texto horizontalmente */
-        margin-bottom: 30px; /* Espaciado inferior de 30px entre el título y el siguiente elemento */
-        font-size: 1.8rem; /* Tamaño de fuente del título en unidades rem (relativo al tamaño de la raíz) */
+        color: #007BFF; /* Azul brillante */
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.2rem;
     }
-    
+
     /* Campos del formulario */
     .form-control {
-        font-size: 1.1rem; /* Tamaño de fuente de 1.1 rem, ligeramente más grande para mejor legibilidad */
-        padding: 10px 15px; /* Padding (espacio interno) de 10px arriba/abajo y 15px izquierda/derecha */
-        border: 1px solid #009B9F; /* Borde de 1px sólido con color azul-verde (#009B9F) */
-        border-radius: 8px; /* Bordes redondeados en los campos del formulario */
-        transition: all 0.3s ease; /* Transición suave para cualquier cambio de estilo en 0.3 segundos */
+        font-size: 1.1rem;
+        padding: 15px;
+        border: 2px solid #007BFF;
+        border-radius: 8px;
+        transition: all 0.3s ease;
     }
-    
+
     .form-control:focus {
-        border-color: #1D2C7B; /* Cambia el color del borde a azul oscuro cuando el campo está en foco */
-        box-shadow: 0 0 8px rgba(29, 44, 123, 0.2); /* Añade una sombra alrededor del campo en foco para mayor énfasis */
-        outline: none; /* Elimina el contorno por defecto que aparece cuando un campo está enfocado */
+        border-color: #0056b3;
+        box-shadow: 0 0 8px rgba(0, 86, 179, 0.5);
+        outline: none;
     }
-    
-    /* Botones más pequeños */
-    .btn-primary, .btn-secondary {
-        background-color: #009B9F; /* Fondo de los botones en color azul-verde */
-        border-color: #009B9F; /* Borde del mismo color que el fondo */
-        font-weight: bold; /* Texto de los botones en negrita */
-        padding: 8px 20px;  /* Padding (espaciado interno) reducido: 8px arriba/abajo y 20px izquierda/derecha */
-        font-size: 0.9rem;   /* Tamaño de fuente más pequeño (0.9 rem) */
-        border-radius: 6px; /* Bordes ligeramente redondeados (6px) en los botones */
-        transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves en el color de fondo y sombra cuando el usuario interactúa */
-        width: auto;  /* El ancho de los botones se ajusta automáticamente al contenido */
+
+    /* Etiquetas */
+    label {
+        font-weight: bold;
+        color: #0056b3;
+        margin-bottom: 8px;
     }
-    
-    /* Hover en los botones */
+
+    /* Botones */
+    .btn-primary {
+        background-color: #007BFF;
+        border: none;
+        font-weight: bold;
+        font-size: 1rem;
+        padding: 10px 25px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-top: 15px;
+    }
+
     .btn-primary:hover {
-        background-color: #1D2C7B; /* Cambia el fondo a azul oscuro cuando se pasa el ratón sobre el botón principal */
-        box-shadow: 0px 4px 10px rgba(29, 44, 123, 0.2); /* Añade una sombra suave al hacer hover */
+        background-color: #0056b3;
+        transform: scale(1.05);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     }
-    
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+        font-weight: bold;
+        font-size: 1rem;
+        padding: 10px 25px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-top: 15px;
+        color: #fff;
+    }
+
     .btn-secondary:hover {
-        background-color: #1D2C7B; /* Cambia el fondo a azul oscuro cuando se pasa el ratón sobre el botón secundario */
-        box-shadow: 0px 4px 10px rgba(65, 48, 116, 0.2); /* Añade una sombra suave, con un toque morado, al hacer hover */
+        background-color: #5a6268;
+        transform: scale(1.05);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     }
-    
-    /* Espaciado de campos */
-    .mb-3 {
-        margin-bottom: 1.5rem; /* Añade un margen inferior de 1.5rem entre los campos del formulario */
-    }
-    
-    /* Margen superior del contenedor */
-    .mt-5 {
-        margin-top: 5rem; /* Añade un margen superior de 5rem para dar espacio entre el contenedor y el contenido anterior */
-    }
-    
 </style>
 
 {% endblock %}

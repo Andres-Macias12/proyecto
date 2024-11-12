@@ -1,0 +1,35 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Lista de Inventario{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Inventario de Productos</h2>
+    <a href="{% url 'agregar_producto' %}" class="btn btn-primary mb-4">Agregar Producto</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>${{ producto.precio }}</td>
+                <td>
+                    <a href="{% url 'editar_producto' producto.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'eliminar_producto' producto.pk %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

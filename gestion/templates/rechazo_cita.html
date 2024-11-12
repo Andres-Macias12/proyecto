@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancelación de Cita</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            margin: 50px auto;
+            padding: 30px;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #f44336;
+        }
+        p {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        .confirmacion {
+            font-size: 20px;
+            font-weight: bold;
+            color: #f44336;
+        }
+        form {
+            margin-top: 20px;
+        }
+        textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>¡Cita Cancelada!</h2>
+        <p>Estimado/a <strong>{{ cita.paciente.nombre }} {{ cita.paciente.apellido }}</strong>,</p>
+        <p>Tu cita agendada para el día <strong>{{ cita.fecha|date:"d/m/Y" }}</strong> a las <strong>{{ cita.fecha|time:"H:i" }}</strong> ha sido cancelada.</p>
+        <p class="confirmacion">Lamentamos que no puedas asistir, pero esperamos verte en otra oportunidad.</p>
+        
+        {% if cita.observacion %}
+            <p><strong>Observación:</strong> {{ cita.observacion }}</p>
+        {% endif %}
+
+        <!-- Formulario para observación y reprogramación -->
+        <form action="{% url 'reprogramar_cita' cita.id %}" method="post">
+            {% csrf_token %}
+            <label for="observacion">Deja una observación:</label>
+            <textarea id="observacion" name="observacion" rows="4" placeholder="Escribe aquí tu observación..."></textarea>
+            
+            <label for="reprogramacion">¿Deseas reprogramar la cita?</label>
+            <select id="reprogramacion" name="reprogramacion">
+                <option value="">Selecciona una opción</option>
+                <option value="si">Sí, deseo reprogramar</option>
+                <option value="no">No, solo cancelarla</option>
+            </select>
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>

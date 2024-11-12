@@ -1,0 +1,128 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Editar Producto{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-primary mb-4">Editar Producto</h2>
+        <form method="POST" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="row">
+                <!-- Nombre del Producto -->
+                <div class="col-md-6 mb-3">
+                    <label for="nombre_producto" class="form-label">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="nombre_producto" name="nombre_producto" value="{{ form.nombre_producto.value }}" placeholder="Ej. Cepillo Dental" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingresa el nombre del producto.
+                    </div>
+                </div>
+
+                <!-- Precio -->
+                <div class="col-md-6 mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="precio" name="precio" value="{{ form.precio.value }}" placeholder="Ej. 10.00" step="0.01" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingresa un precio válido.
+                    </div>
+                </div>
+
+                <!-- Cantidad -->
+                <div class="col-md-6 mb-3">
+                    <label for="cantidad" class="form-label">Cantidad</label>
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ form.cantidad.value }}" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingresa una cantidad válida.
+                    </div>
+                </div>
+
+                <!-- Descripción -->
+                <div class="col-md-12 mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Breve descripción del producto..." required>{{ form.descripcion.value }}</textarea>
+                    <div class="invalid-feedback">
+                        Por favor, ingresa una descripción.
+                    </div>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-warning btn-lg shadow-sm w-100">
+                        <i class="fas fa-pencil-alt"></i> Actualizar Producto
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+/* Contenedor de la tarjeta */
+.card {
+    border-radius: 15px;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #007bff;
+}
+
+/* Estilos de los campos */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+/* Efecto al hacer foco */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Descripción de los campos */
+label.form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Botón de Enviar */
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 50px;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+/* Feedback de error */
+.invalid-feedback {
+    font-size: 0.875rem;
+    color: red;
+}
+
+/* Alineación de los campos */
+.row {
+    margin-bottom: 20px;
+}
+
+/* Mejorar la accesibilidad de las formas */
+.needs-validation .form-control:invalid {
+    border-color: red;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Crear Nueva Factura{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Card con sombra y bordes redondeados -->
+    <div class="card shadow-lg border-0 rounded-4">
+        <!-- Encabezado de la tarjeta con degradado -->
+        <div class="card-header text-white text-center py-4" style="background: linear-gradient(135deg, #00b4d8, #0077b6);">
+            <h2 class="fw-bold">Crear Nueva Factura</h2>
+            <p class="mb-0">Complete los detalles a continuación para generar una factura</p>
+        </div>
+
+        <!-- Cuerpo de la tarjeta -->
+        <div class="card-body p-5 bg-light">
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Selección de Paciente -->
+                <div class="mb-4">
+                    <label for="paciente" class="form-label text-secondary fw-bold">Paciente</label>
+                    {{ form.paciente }}
+                    {% if form.paciente.errors %}
+                        <div class="text-danger small mt-1">{{ form.paciente.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Selección de Tratamientos -->
+                <div class="mb-4">
+                    <label class="form-label text-secondary fw-bold">Tratamientos</label>
+                    <div class="border p-3 rounded bg-white">
+                        {% for tratamiento in form.tratamientos %}
+                            <div class="form-check">
+                                {{ tratamiento.tag }}
+                                <label class="form-check-label" for="{{ tratamiento.id_for_label }}">
+                                    {{ tratamiento.choice_label }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                        {% if form.tratamientos.errors %}
+                            <div class="text-danger small mt-1">{{ form.tratamientos.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Campo de Total -->
+                <div class="mb-4">
+                    <label for="total" class="form-label text-secondary fw-bold">Monto Total</label>
+                    {{ form.total }}
+                    {% if form.total.errors %}
+                        <div class="text-danger small mt-1">{{ form.total.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Estado de Pago -->
+                <div class="mb-4">
+                    <label for="estado_pago" class="form-label text-secondary fw-bold">Estado de Pago</label>
+                    {{ form.estado_pago }}
+                    {% if form.estado_pago.errors %}
+                        <div class="text-danger small mt-1">{{ form.estado_pago.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5 py-3 fw-bold shadow" style="background: linear-gradient(135deg, #00b4d8, #0077b6); border: none;">
+                        <i class="fas fa-file-invoice-dollar me-2"></i> Generar Factura
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Pie de página con recordatorio -->
+        <div class="card-footer text-center text-muted py-3">
+            <small><i class="fas fa-info-circle"></i> Verifique los datos antes de guardar la factura.</small>
+        </div>
+    </div>
+</div>
+
+<!-- Estilos personalizados -->
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-bottom: 2px solid #00b4d8;
+    }
+
+    .card-body {
+        background-color: #f8f9fa;
+        padding: 40px;
+    }
+
+    .form-label {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #6c757d;
+    }
+
+    .form-control {
+        font-size: 1rem;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .form-control:focus {
+        border-color: #0077b6;
+        box-shadow: 0 0 5px rgba(0, 119, 182, 0.5);
+    }
+
+    .btn-primary {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0073a6;
+        transform: scale(1.05);
+    }
+
+    .card-footer {
+        background-color: #f1f1f1;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    .card-footer .fa-info-circle {
+        color: #0077b6;
+    }
+</style>
+
+{% endblock %}

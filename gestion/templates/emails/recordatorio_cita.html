@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recordatorio de Cita</title>
     <style>
-        /* Estilos básicos para correos electrónicos */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -26,7 +25,7 @@
             padding-bottom: 20px;
         }
         .email-header img {
-            width: 150px; /* Ajusta el tamaño del logo */
+            width: 150px;
         }
         .email-body {
             padding: 20px;
@@ -43,7 +42,7 @@
             padding-top: 20px;
         }
         .button {
-            background-color: #009B9F; /* Color principal */
+            background-color: #009B9F;
             color: #ffffff;
             padding: 10px 20px;
             text-decoration: none;
@@ -55,29 +54,32 @@
             background-color: #413074;
         }
         .button:hover {
-            background-color: #1D2C7B; /* Color de hover */
+            background-color: #1D2C7B;
         }
     </style>
 </head>
 <body>
     <div class="email-container">
         <div class="email-header">
-            <img src="{{ logo_url }}" alt="Logo DentalCare">
+            <img src="cid:logo_cid" alt="Logo DentalCare" width="150" style="display: block; margin: 0 auto;">
         </div>
         <div class="email-body">
             <p>Estimado/a <strong>{{ cita.paciente.nombre }} {{ cita.paciente.apellido }}</strong>,</p>
 
-            <p>Este es un recordatorio de su cita agendada para el día <strong>{{ cita.fecha|date:"d/m/Y" }}</strong> a las <strong>{{ cita.fecha|date:"H:i" }}</strong>.</p>
-
+            <!-- Mostrar la nueva fecha y hora si existe una reprogramación, de lo contrario la fecha original -->
+            {% if cita.solicitud_reprogramacion %}
+                <p>Este es un recordatorio de su cita reprogramada para el día <strong>{{ cita.nueva_fecha|date:"d/m/Y" }}</strong> a las <strong>{{ cita.nueva_hora|time:"H:i" }}</strong>.</p>
+            {% else %}
+                <p>Este es un recordatorio de su cita agendada para el día <strong>{{ cita.fecha|date:"d/m/Y" }}</strong> a las <strong>{{ cita.fecha|time:"H:i" }}</strong>.</p>
+            {% endif %}
+            
             <p>Por favor, confirme su asistencia utilizando los siguientes enlaces:</p>
-
             <p>
                 <a href="{{ confirm_url }}" class="button">Confirmar asistencia</a>
             </p>
             <p>
                 <a href="{{ reject_url }}" class="button button-secondary">Rechazar cita</a>
             </p>
-
             <p>Saludos cordiales,</p>
             <p>Su equipo dental.</p>
         </div>

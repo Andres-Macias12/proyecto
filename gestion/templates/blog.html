@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<style>
+    /* Banner de fondo para el blog */
+    .blog-banner {
+        background-image: url('{% static "img/blog_banner.png" %}'); /* Reemplaza con la imagen del banner */
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+    }
+
+    /* Superposición oscura */
+    .blog-banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad */
+        z-index: 1;
+    }
+
+    .blog-banner-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 20px;
+    }
+
+    .blog-banner-content h1 {
+        font-size: 42px;
+        font-weight: bold;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .blog-banner-content p {
+        font-size: 18px;
+        margin-top: 10px;
+        font-weight: 300;
+    }
+
+    /* Estilo de la barra de búsqueda */
+    .blog-search-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .blog-search {
+        width: 80%;
+        max-width: 600px;
+        position: relative;
+    }
+
+    .blog-search input[type="text"] {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 20px;
+        border: 2px solid #ddd;
+        font-size: 16px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding-right: 40px;
+    }
+
+    .blog-search button {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        font-size: 18px;
+        color: #555;
+        cursor: pointer;
+    }
+
+    /* Lista de artículos */
+    .blog-articles {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .blog-article {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .blog-article:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .blog-article img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .blog-article-content {
+        padding: 20px;
+    }
+
+    .blog-article-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+    }
+
+    .blog-article-excerpt {
+        margin-top: 10px;
+        color: #666;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .read-more {
+        display: inline-block;
+        margin-top: 15px;
+        color: #0077cc;
+        font-weight: bold;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .read-more:hover {
+        color: #005fa3;
+    }
+
+</style>
+
+<!-- Banner de Blog -->
+<div class="blog-banner">
+    <div class="blog-banner-overlay"></div>
+    <div class="blog-banner-content">
+        <h1>BLOG</h1>
+        <p>Nuestro Blog se actualiza frecuentemente con temas de interés para odontólogos y otros actores importantes de la industria dental.</p>
+    </div>
+</div>
+
+<!-- Barra de Búsqueda -->
+<div class="blog-search-container">
+    <div class="blog-search">
+        <input type="text" placeholder="Busca en nuestro Blog...">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+</div>
+
+<!-- Lista de Artículos del Blog -->
+<div class="blog-articles">
+    {% for article in articles %}
+    <div class="blog-article">
+        <img src="{{ article.image.url }}" alt="{{ article.title }}">
+        <div class="blog-article-content">
+            <h3 class="blog-article-title">{{ article.title }}</h3>
+            <p class="blog-article-excerpt">{{ article.summary }}</p>
+            <a href="{% url 'blog_detail' article.pk %}" class="read-more">Leer más</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>No hay artículos disponibles en este momento.</p>
+    {% endfor %}
+</div>
+{% endblock %}

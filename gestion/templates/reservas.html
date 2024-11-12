@@ -1,0 +1,237 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}Contáctanos{% endblock %}
+
+{% block content %}
+<!-- SweetAlert2 CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+    /* Banner de fondo */
+    .banner-header {
+        background-image: url('{% static "img/banner.png" %}');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+    }
+
+    /* Superposición oscura para mejorar la legibilidad */
+    .banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+
+    /* Contenido dentro del banner */
+    .banner-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 20px;
+    }
+
+    .banner-content h2 {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .banner-content p {
+        font-size: 16px;
+        margin-top: 10px;
+        font-weight: 300;
+    }
+
+    /* Contenedor del formulario de contacto */
+    .contact-form-container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        padding: 40px;
+        max-width: 900px;
+        width: 90%;
+        margin: 40px auto;
+        text-align: center;
+    }
+
+    /* Estructura del formulario */
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: space-between;
+    }
+
+    .form-group {
+        flex: 1;
+        min-width: 240px;
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 8px;
+        font-size: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e7ff;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        margin-bottom: 15px;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #0077cc;
+        box-shadow: 0 0 5px rgba(0, 119, 204, 0.2);
+        outline: none;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .submit-button {
+        margin-top: 20px;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        background-color: #0077cc;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .submit-button:hover {
+        background-color: #005fa3;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<!-- Banner con imagen de fondo -->
+<div class="banner-header">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+        <h2>Contáctanos</h2>
+        <p>Estamos aquí para ayudarte. Si tienes alguna pregunta sobre nuestros servicios o quieres saber más sobre cómo DentalCare puede optimizar tu clínica, no dudes en ponerte en contacto con nosotros.</p>
+    </div>
+</div>
+
+<!-- Script de SweetAlert2 para mostrar mensajes de éxito o error -->
+{% if messages %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            {% for message in messages %}
+                Swal.fire({
+                    icon: '{% if message.tags == "success" %}success{% else %}error{% endif %}',
+                    title: '{% if message.tags == "success" %}¡Éxito!{% else %}Error{% endif %}',
+                    text: "{{ message }}",
+                    confirmButtonText: 'Cerrar',
+                    timer: 5000,
+                    timerProgressBar: true
+                });
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+
+<!-- Contenido del formulario de contacto -->
+<div class="contact-form-container">
+    <form class="contact-form" action="{% url 'reservation' %}" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group">
+                <label for="first_name">Nombre *</label>
+                <input type="text" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Apellidos *</label>
+                <input type="text" id="last_name" name="last_name" required>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">Correo Electrónico *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Número de móvil o celular *</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="role">Selecciona tu cargo en la clínica dental</label>
+                <select id="role" name="role">
+                    <option value="">Selecciona</option>
+                    <option value="dentist">Dentista</option>
+                    <option value="assistant">Asistente Dental</option>
+                    <option value="manager">Gerente de Clínica</option>
+                    <option value="other">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="region">País o región *</label>
+                <input type="text" id="region" name="region" required>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="current_stage">Selecciona la etapa actual de tu clínica</label>
+                <select id="current_stage" name="current_stage">
+                    <option value="">Selecciona</option>
+                    <option value="startup">Inicio</option>
+                    <option value="growth">Crecimiento</option>
+                    <option value="established">Establecida</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="software">¿Utilizas algún software en tu clínica?</label>
+                <select id="software" name="software">
+                    <option value="">Selecciona</option>
+                    <option value="yes">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-button">Enviar formulario</button>
+    </form>
+</div>
+{% endblock %}

@@ -45,9 +45,9 @@
                                     <a href="{% url 'editar_paciente' paciente.id %}" class="btn btn-outline-warning btn-sm">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
-                                    <a href="{% url 'eliminar_paciente' paciente.id %}" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este paciente?');">
+                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="confirmDeletion({{ paciente.id }}, '{{ paciente.nombre }} {{ paciente.apellido }}')">
                                         <i class="fas fa-trash-alt"></i> Eliminar
-                                    </a>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -87,6 +87,39 @@
         </div>
     </div>
 </div>
+
+<!-- Modal de Confirmación -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar a <strong id="pacienteNombre"></strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form id="deleteForm" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Confirmar Eliminación</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para Confirmación de Eliminación -->
+<script>
+    function confirmDeletion(id, nombre) {
+        document.getElementById('pacienteNombre').textContent = nombre;
+        const deleteForm = document.getElementById('deleteForm');
+        deleteForm.action = `{% url 'eliminar_paciente' 0 %}`.replace('0', id);
+        var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        confirmModal.show();
+    }
+</script>
 
 <!-- Estilos personalizados -->
 <style>

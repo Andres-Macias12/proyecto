@@ -1,0 +1,159 @@
+{% extends 'gestion/base.html' %}
+
+{% block title %}Agregar Producto{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Card con forma moderna -->
+    <div class="card shadow-xl rounded-lg p-5" style="max-width: 900px; margin: auto; background-color: #f1f1f1;">
+        <h2 class="text-center mb-4" style="color: #005c99; font-size: 2rem; font-family: 'Roboto', sans-serif;">Agregar Nuevo Producto</h2>
+
+        <form method="POST" class="needs-validation" novalidate>
+            {% csrf_token %}
+            
+            <!-- Fila de entrada de nombre y precio -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        {{ form.nombre }}
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre del Producto</label>
+                        {% if form.nombre.errors %}
+                            <div class="text-danger small mt-1">{{ form.nombre.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        {{ form.precio }}
+                        <label for="{{ form.precio.id_for_label }}" class="form-label">Precio</label>
+                        {% if form.precio.errors %}
+                            <div class="text-danger small mt-1">{{ form.precio.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fila de entrada de cantidad -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        {{ form.cantidad }}
+                        <label for="{{ form.cantidad.id_for_label }}" class="form-label">Cantidad</label>
+                        {% if form.cantidad.errors %}
+                            <div class="text-danger small mt-1">{{ form.cantidad.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Descripción del producto -->
+            <div class="mb-4">
+                <div class="form-floating">
+                    {{ form.descripcion }}
+                    <label for="{{ form.descripcion.id_for_label }}" class="form-label">Descripción</label>
+                    <div class="text-muted small">Breve descripción del producto.</div>
+                    {% if form.descripcion.errors %}
+                        <div class="text-danger small mt-1">{{ form.descripcion.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Botón para agregar producto -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-lg btn-primary shadow-lg rounded-pill px-4 py-3" style="background: #005c99; color: white; transition: 0.3s;">
+                    <i class="fas fa-plus-circle"></i> Agregar Producto
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Estilos adicionales para darle un nuevo toque -->
+<style>
+    /* Fondo suave y sombras en la tarjeta */
+    .card {
+        border-radius: 15px;
+        background: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Sombra adicional al hacer hover sobre los campos de texto */
+    .form-floating input, .form-floating textarea {
+        border-radius: 12px;
+        border: 1px solid #ddd;
+        padding: 12px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .form-floating input:focus, .form-floating textarea:focus {
+        border-color: #005c99;
+        box-shadow: 0 0 5px rgba(0, 92, 153, 0.5);
+    }
+
+    /* Botón principal con transiciones y sombra */
+    .btn-primary {
+        background: #005c99;
+        border: none;
+        font-weight: 600;
+        border-radius: 50px;
+        padding: 12px 40px;
+        font-size: 18px;
+    }
+
+    .btn-primary:hover {
+        background: #003f6b;
+        box-shadow: 0 5px 15px rgba(0, 92, 153, 0.3);
+    }
+
+    /* Alineación y espaciado de los campos de formulario */
+    .form-floating {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Sección de descripción con más estilo */
+    .form-floating textarea {
+        height: 150px;
+        resize: vertical;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    /* Estilos para mensajes de error */
+    .text-danger {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    /* Asegurarse de que el diseño sea fluido y responsivo */
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        .form-floating label {
+            font-size: 14px;
+        }
+    }
+
+    /* Estilo para las etiquetas flotantes */
+    .form-floating label {
+        color: #aaa;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .form-floating input:focus + label, .form-floating textarea:focus + label,
+    .form-floating input:not(:focus):valid + label, .form-floating textarea:not(:focus):valid + label {
+        font-size: 0.75rem;
+        color: #005c99;
+        transform: translateY(-20px);
+    }
+
+    /* Para cuando los campos no tienen foco, pero tienen contenido */
+    .form-floating input:not(:focus):valid, .form-floating textarea:not(:focus):valid {
+        border-color: #005c99;
+    }
+
+</style>
+
+{% endblock %}
