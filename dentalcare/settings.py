@@ -7,9 +7,9 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Clave secreta y depuración usando variables de entorno
-SECRET_KEY = config('DJANGO_SECRET_KEY', default='clave-secreta-predeterminada')
-DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+DJANGO_SECRET_KEY= Maciasandres12
+DEBUG=False
+ALLOWED_HOSTS='.railway.app, localhost'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,9 +64,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='your-email@example.com')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='your-password')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER)
+EMAIL_HOST_USER = 'andresmacias978@gmail.com'
+EMAIL_HOST_PASSWORD = 'zkxwbeazibkweiyn'
+DEFAULT_FROM_EMAIL = 'andresmacias978@gmail.com'
 
 # Configuración de archivos estáticos para producción con Whitenoise
 STATIC_URL = '/static/'
